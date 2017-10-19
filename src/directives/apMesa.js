@@ -28,7 +28,8 @@
     ],
     onRegisterApi: function(api) {
       // noop - user overrides to get a hold of api object
-    }
+    },
+    fixedWidthLayout: false,
   };
 
   function defaults(obj) {
@@ -178,6 +179,7 @@
 
       var deregStorageWatchers = [];
       scope.scrollDiv = element.find('.mesa-rows-table-wrapper');
+      scope.wrapperDiv = element.find('.ap-mesa-wrapper');
 
       scope.$watch('_columns', function(columns, oldColumns) {
         if (columns !== scope.columns) {

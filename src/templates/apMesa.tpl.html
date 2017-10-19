@@ -3,8 +3,12 @@
 'paging-strategy-scroll': options.pagingStrategy === 'SCROLL',
 'ap-mesa-loading-error': !!transientState.loadingError,
 'ap-mesa-no-data': !transientState.loading && !transientState.loadingError && visible_rows.length === 0
-}">
-  <table ng-class="classes" class="ap-mesa mesa-header-table">
+}" ng-style="{ 'overflow-x': options.fixedWidthLayout ? 'scroll' : 'visible' }">
+  <table ng-class="classes" class="ap-mesa mesa-header-table" ng-class="[
+    {
+      'full-width': !options.fixedWidthLayout,
+      'table-nonfluid': !!options.fixedWidthLayout
+    }]">
     <thead>
       <!-- MAIN ROW OF COLUMN HEADERS -->
       <tr ui-sortable="sortableOptions" ng-model="enabledColumnObjects" class="ap-mesa-header-row">
@@ -24,7 +28,7 @@
           column.classes ? column.classes : ''
         ]"
         ng-attr-title="{{ column.title || '' }}"
-        ng-style="{ width: column.width, 'min-width': column.width, 'max-width': column.width }">
+        ng-style="{ width: options.fixedWidthLayout ? 'auto' : column.width, 'min-width': column.width, 'max-width': column.width }">
 
           <!-- COLUMN TEXT -->
           <span class="column-text">
@@ -65,7 +69,8 @@
           ng-model="persistentState.searchTerms[column.id]"
           ng-attr-placeholder="{{ column.filterPlaceholder ? column.filterPlaceholder : (column.filter.placeholder || 'filter') }}"
           ng-attr-title="{{ column.filter && column.filter.title }}"
-          ng-class="{'active': persistentState.searchTerms[column.id] }">
+          ng-class="{'active': persistentState.searchTerms[column.id] }"
+          ng-style="{'width': options.fixedWidthLayout ? column.width : '100%'}">
 
           <!-- FILTER CLEAR BUTTON -->
           <button
@@ -84,12 +89,21 @@
   </table>
   <div ap-mesa-status-display></div>
   <div class="mesa-rows-table-wrapper" ng-style="tbodyNgStyle" ng-hide="transientState.loadingError">
-    <table ng-class="classes" class="ap-mesa mesa-rows-table">
+    <table ng-class="classes" class="ap-mesa mesa-rows-table" ng-class="[
+      {
+        'full-width': !options.fixedWidthLayout,
+        'table-nonfluid': options.fixedWidthLayout
+      }]">
       <thead>
+        <colgroup ng-if="options.fixedWidthLayout">
+          <col ng-repeat="column in enabledColumnObjects"
+            ng-style="{ width: column.width }"
+            />
+        </colgroup>
         <th
             scope="col"
             ng-repeat="column in enabledColumnObjects"
-            ng-style="{ width: column.width, 'min-width': column.width, 'max-width': column.width }"
+            ng-style="{ width: options.fixedWidthLayout ? 'auto' : column.width, 'min-width': column.width, 'max-width': column.width }"
           ></th>
         </tr>
       </thead>

@@ -6,8 +6,10 @@
 /* styles for both header- and rows- tables */
 .ap-mesa {
   table-layout: fixed;
-  width: 100%;
   margin-bottom: 0;
+}
+.ap-mesa.full-width {
+  width: 100%;
 }
 
 /* the visible table header */
@@ -29,6 +31,7 @@
 }
 .mesa-rows-table-wrapper {
   overflow: auto;
+  overflow-x: visible;
 }
 .mesa-rows-table > tbody + tbody {
   border-top: none;
@@ -51,7 +54,7 @@
 
 /* search input */
 .ap-mesa tr.ap-mesa-filter-row td input {
-  width: 100%;
+  /* width: 100%; */
   border-radius: 2em;
   border: 1px solid #CCC;
   outline: none;
@@ -111,7 +114,7 @@ when a discreet width has been set on it */
 
 /* wrapper for text in a th */
 .ap-mesa th .column-text {
-  max-width: 100%;
+  /* max-width: 100%; */
   overflow: hidden;
   display: block;
 }
@@ -202,6 +205,9 @@ table tbody .ap-mesa-dummy-row td {
 .paging-strategy-paginate .ap-mesa-loading-display.ng-enter {
   transition-delay: 0s;
 }
+.ap-mesa-overflow-x-scroll {
+  overflow-x: scroll;
+}
 .ap-mesa-loading-display.ng-enter,
 .ap-mesa-loading-display.ng-enter.ng-leave.ng-leave-active {
   opacity:0;
@@ -280,4 +286,6 @@ table tbody .ap-mesa-dummy-row td {
     box-shadow: 0 1.5em 0 0;
   }
 }
-
+.table-nonfluid {
+  width: auto !important;
+}

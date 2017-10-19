@@ -10,6 +10,7 @@ angular.module('apMesa.ghPage')
     storageKey: 'example'
   };
   this.my_table_options_paginated = angular.extend({ pagingStrategy: 'PAGINATE' }, this.my_table_options);
+  this.my_table_options_fixed_width = angular.extend({ fixedWidthLayout: true }, this.my_table_options);
   this.my_selected_rows = [];
   this.my_table_columns = [
     {
@@ -22,28 +23,34 @@ angular.module('apMesa.ghPage')
                   '<i class="glyphicon glyphicon-triangle-right" ng-if="!rowIsExpanded"></i>' +
                   '<i class="glyphicon glyphicon-triangle-bottom" ng-if="rowIsExpanded"></i>' +
                   '{{ row.DeviceName }}' +
-                '</a>'
+                '</a>',
+      width: '120px',
     },
     {
       id: 'brand',
       key: 'Brand',
       sort: 'string',
-      label: 'Brand'
+      label: 'Brand',
+      width: '100px',
     },
     {
       id: 'edge',
       key: 'edge',
       label: 'Edge',
       sort: 'string',
-      filter: 'like'
+      filter: 'like',
+      width: '120px',
     },
     {
       id: 'tech',
       key: 'technology',
       sort: 'string',
-      label: 'Tech'
+      label: 'Tech',
+      width: '80px',
     }
   ];
+    
+  this.fixed_width_paging_scheme = 'scroll';
   this.my_enabled_columns = this.my_table_columns.map(function(c) { return c.id; });
   this.phoneData = phoneData;
   var _this = this;
