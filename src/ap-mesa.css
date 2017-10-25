@@ -29,10 +29,13 @@
   border-width: 0;
   padding: 0 !important;
 }
-.mesa-rows-table-wrapper {
+.mesa-rows-table-wrapper.auto-layout {
   overflow: auto;
+}
+.mesa-rows-table-wrapper.fixed-width-layout {
   overflow-x: visible;
 }
+
 .mesa-rows-table > tbody + tbody {
   border-top: none;
 }

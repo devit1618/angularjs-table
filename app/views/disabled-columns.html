@@ -86,7 +86,7 @@
           selected="vm.my_selected_rows"
           options="vm.my_table_options_fixed_width"
           enabled-columns="vm.my_enabled_columns"
-          table-class="table-nonfluid">
+          table-class="table table-nonfluid">
         </ap-mesa>
       </div>
 
@@ -97,7 +97,7 @@
           selected="vm.my_selected_rows"
           options="vm.my_table_options_fixed_width"
           enabled-columns="vm.my_enabled_columns"
-          table-class="table-nonfluid">
+          table-class="table table-nonfluid">
         </ap-mesa>
       </div>
       
@@ -112,6 +112,9 @@
       </div>
 
       <pre>{{ vm.my_enabled_columns | json }}</pre>
+
+      <input type="checkbox" ng-checked="vm.my_table_options_fixed_width.fixedWidthLayout" ng-click="vm.my_table_options_fixed_width.fixedWidthLayout = !vm.my_table_options_fixed_width.fixedWidthLayout"/>
+      options.fixedWidthLayout
 
     </div>
   </div>

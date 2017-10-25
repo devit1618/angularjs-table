@@ -114,7 +114,6 @@
     }
 
     function initOptions(scope) {
-
       // Sanity check for getter
       if (scope.options !== undefined && scope.options.hasOwnProperty('getter')) {
         if (typeof scope.options.getter !== 'function') {
@@ -176,7 +175,6 @@
     }
 
     function postLink(scope, element) {
-
       var deregStorageWatchers = [];
       scope.scrollDiv = element.find('.mesa-rows-table-wrapper');
       scope.wrapperDiv = element.find('.ap-mesa-wrapper');
@@ -227,6 +225,25 @@
       scope.$watch('options', function(newOptions, oldOptions) {
         resetState(scope);
         initOptions(scope);
+      });
+
+      scope.$watch('options.fixedWidthLayout', function(newValue, oldValue) {
+        if (newValue !== oldValue) {
+          if (angular.isString(scope.classes)) {
+            if (newValue && scope.classes.indexOf('table-nonfluid') === -1) {
+              scope.classes = scope.classes + ' table-nonfluid';
+            } else if (!newValue && scope.classes.indexOf('table-nonfluid') > -1) {
+              scope.classes = scope.classes.split('table-nonfluid').join('');
+            }
+            if (!newValue && scope.classes.indexOf('full-width') === -1) {
+              scope.classes = scope.classes + ' full-width';
+            } else if (newValue && scope.classes.indexOf('full-width') > -1) {
+              scope.classes = scope.classes.split('full-width').join('');
+            }
+          }
+          resetState(scope);
+          initOptions(scope);
+        }
       });
 
       scope.$watch('options.storage', function(storage) {
